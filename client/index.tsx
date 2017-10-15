@@ -1,7 +1,9 @@
 import * as React from "react"
 import * as ReactDOM from "react-dom"
 import { observable, action } from "mobx"
+import { observer } from "mobx-react"
 
+@observer
 class Ping extends React.PureComponent<{ store: Store }> {
   render() {
     return (
@@ -20,9 +22,10 @@ type PingResponse = {
 class Store {
   @observable message: string = 'no data'
 
-  @action async ping() {
+  @action.bound async ping() {
     const res = await fetch('/api/ping')
-    this.message = (await res.json() as PingResponse).message
+    const data = await res.json() as PingResponse
+    this.message = data.message
   }
 }
 
