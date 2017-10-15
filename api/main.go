@@ -1,20 +1,13 @@
 package main
 
-import (
-  "fmt"
-  "net/http"
-  "goji.io"
-  "goji.io/pat"
-)
-
-func hello(w http.ResponseWriter, r *http.Request) {
-  name := pat.Param(r, "name")
-  fmt.Fprintf(w, "Hello, %s!", name)
-}
+import "github.com/gin-gonic/gin"
 
 func main() {
-  mux := goji.NewMux()
-  mux.HandleFunc(pat.Get("/hello/:name"), hello)
-
-  http.ListenAndServe("0.0.0.0:8080", mux)
+  r := gin.Default()
+  r.GET("/ping", func(c *gin.Context) {
+    c.JSON(200, gin.H {
+      "message": "pong",
+    })
+  })
+  r.Run() // listen and serve on 0.0.0.0:8080
 }
