@@ -6,3 +6,9 @@ services:
       - ./api:/go/src/app
     ports:
       - 4000:8080
+  client:
+    build: ./client
+    volumes:
+      - ./client:/main
+    ports:
+      - 4001:9966
