@@ -1,12 +1,14 @@
 version: '3'
 services:
   api:
+    tty: true
     build: ./api
     volumes:
       - ./api:/go/src/app
     ports:
       - 4000:8080
   client:
+    tty: true
     build: ./client
     volumes:
       - ./client:/main
