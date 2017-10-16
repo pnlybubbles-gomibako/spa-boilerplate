@@ -1,5 +1,5 @@
 {
-  "name": "photomemory",
+  "name": "client",
   "version": "0.1.0",
   "devDependencies": {
     "babel-core": "^7.0.0-beta.3",
@@ -9,8 +9,18 @@
     "babel-preset-react": "^7.0.0-beta.3",
     "babel-preset-typescript": "^7.0.0-beta.3",
     "babelify": "github:pioug/babelify#babel7",
-    "browserify": "^14.4.0",
-    "budo": "^10.0.4"
+    "budo": "^10.0.4",
+    "eslint": "^4.9.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-config-standard-react": "^5.0.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.2.0",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-react": "^7.4.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "eslint-plugin-typescript": "^0.8.0",
+    "typescript": "^2.5.3",
+    "typescript-eslint-parser": "^8.0.0"
   },
   "dependencies": {
     "@types/react": "^16.0.10",
@@ -21,7 +31,8 @@
     "react-dom": "^16.0.0"
   },
   "scripts": {
-    "dev": "budo index.tsx --live"
+    "dev": "budo index.tsx --live",
+    "test": "eslint *.ts*"
   },
   "browserify": {
     "transform": [

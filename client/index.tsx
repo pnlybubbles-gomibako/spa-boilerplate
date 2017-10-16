@@ -1,11 +1,11 @@
-import * as React from "react"
-import * as ReactDOM from "react-dom"
-import { observable, action } from "mobx"
-import { observer } from "mobx-react"
+import * as React from 'react'
+import * as ReactDOM from 'react-dom'
+import { observable, action } from 'mobx'
+import { observer } from 'mobx-react'
 
 @observer
 class Ping extends React.Component<{ store: Store }> {
-  render() {
+  render () {
     return (
       <div>
         <button onClick={this.props.store.ping}>ping</button>
@@ -22,7 +22,7 @@ type PingResponse = {
 class Store {
   @observable message: string = 'no data'
 
-  @action.bound async ping() {
+  @action.bound async ping () {
     const res = await fetch('/api/ping')
     const data = await res.json() as PingResponse
     this.message = data.message
