@@ -2,14 +2,25 @@ import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import { observable, action } from 'mobx'
 import { observer } from 'mobx-react'
+import styled, { $ } from './src/styled-components'
+
+type TextProps = {
+  emphasis: boolean
+}
+
+const Text = $<TextProps>(styled.h1)`
+  color: ${p => p.emphasis ? 'red' : 'black'};
+`
 
 @observer
 class Ping extends React.Component<{ store: Store }> {
   render () {
+    const s = this.props.store
+
     return (
       <div>
-        <button onClick={this.props.store.ping}>ping</button>
-        <h1>{this.props.store.message}</h1>
+        <button onClick={_ => s.ping()}>ping</button>
+        <Text emphasis={s.loading}>{s.message}</Text>
       </div>
     )
   }
@@ -20,12 +31,15 @@ type PingResponse = {
 }
 
 class Store {
-  @observable message: string = 'no data'
+  @observable message = 'no data'
+  @observable loading = false
 
-  @action.bound async ping () {
+  @action async ping () {
+    this.loading = true
     const res = await fetch('/api/ping')
     const data = await res.json() as PingResponse
     this.message = data.message
+    this.loading = false
   }
 }
 
