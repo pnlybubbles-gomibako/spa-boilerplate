@@ -4,7 +4,7 @@ import { observable, action } from "mobx"
 import { observer } from "mobx-react"
 
 @observer
-class Ping extends React.PureComponent<{ store: Store }> {
+class Ping extends React.Component<{ store: Store }> {
   render() {
     return (
       <div>
@@ -31,5 +31,5 @@ class Store {
 
 ReactDOM.render(
   <Ping store={new Store()} />,
-  document.body
+  document.querySelector('#app')
 )
